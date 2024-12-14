@@ -1,7 +1,6 @@
 package processing.app;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,11 +24,11 @@ public class Sketch {
   /**
    * folder that contains this sketch
    */
-  private File folder;
+  private File folder,buildPath;
 
   private List<SketchFile> files = new ArrayList<>();
 
-  private File buildPath;
+
 
   public static final Comparator<SketchFile> CODE_DOCS_COMPARATOR = new Comparator<SketchFile>() {
     @Override
@@ -49,12 +48,14 @@ public class Sketch {
    * @param file
    *          Any file inside the sketch directory.
    */
-  Sketch(File file) throws IOException {
+  Sketch(File file) throws IOException
+  {
     folder = file.getParentFile();
     files = listSketchFiles(true);
   }
 
-  static public File checkSketchFile(File file) {
+  static public File checkSketchFile(File file)
+  {
     // check to make sure that this .pde file is
     // in a folder of the same name
     String fileName = file.getName();
